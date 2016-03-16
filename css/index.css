@@ -1,0 +1,20 @@
+#createBlackmail {
+	display: none;
+}
+
+#viewBlackmail {
+	display: none;
+}
+
+#errorMsg {
+	display: none;
+}
+
+#logOut {
+	display: none;
+}
+
+#greeting {
+	float: right;
+	margin-top: 1em;
+}

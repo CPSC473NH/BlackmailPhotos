@@ -3,6 +3,7 @@
 <head>
 	<script src="http://code.jquery.com/jquery-2.0.3.min.js"></script>
 	<link href="css/bootstrap.min.css" rel="stylesheet" type="text/css">
+	<link href="css/index.css" rel="stylesheet" type="text/css">
 	<script type="text/javascript" src="js/bootstrap.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
 	<script src="index.js"></script>
@@ -14,12 +15,15 @@
 				<a class="navbar-brand" href="#"> BlackmailPhotos </a>
 			</div>
 			<div id="navbar" class="navbar-collapse collapse">
-				<ul class="nav navbar-nav">
+				<ul class="nav navbar-nav" id="navigationBar">
 					<li class="active"><a href="#">Home</a></li>
 					<li><a href="#" id="signup">Sign Up!</a></li>
 					<li><a href="#" id="signin">Sign In</a></li>
+					<li><a href="#" id="createBlackmail">Create Blackmail</a></li>
+					<li><a href="#" id="viewBlackmail">View Blackmail</a></li>
 					<li><a href="#">About</a></li>
 					<li><a href="#">Contact</a></li>
+					<li><a href="#" id="logOut">Log Out</a></li>
 				</ul>
 			</div>
 		</div>
@@ -33,6 +37,7 @@
 					<h4 class="modal-title" id="registerSignin-title">Sign up</h4>
 				</div>
 				<div class="modal-body">
+					<p class="bg-danger" id="errorMsg"></p>
 					<form role="form" id="registerSignIn-form">
 						<div class="form-group">
 							<label for="inputEmail">Email address</label>

@@ -37,6 +37,11 @@
       "username": "brendon@brendon.com",
       "password": "test",
       "id": 2
+    },
+    {
+      "username": "indra@email.com",
+      "password": 123456,
+      "id": 3
     }
   ]
 }
