@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html>
 <head>
+	<script src="http://code.jquery.com/jquery-2.0.3.min.js"></script>
 	<link href="css/bootstrap.min.css" rel="stylesheet" type="text/css">
 	<script type="text/javascript" src="js/bootstrap.min.js"></script>
-	<script src="http://code.jquery.com/jquery-2.0.3.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
 	<script src="index.js"></script>
 </head>
@@ -16,14 +16,44 @@
 			<div id="navbar" class="navbar-collapse collapse">
 				<ul class="nav navbar-nav">
 					<li class="active"><a href="#">Home</a></li>
-					<li><a href="#">Sign Up!</a></li>
-					<li><a href="#">Sign In</a></li>
+					<li><a href="#" id="signup">Sign Up!</a></li>
+					<li><a href="#" id="signin">Sign In</a></li>
 					<li><a href="#">About</a></li>
 					<li><a href="#">Contact</a></li>
 				</ul>
 			</div>
 		</div>
 	</nav>
+
+	<div class="modal fade" id="registerSignIn" tabindex="-1" role="dialog">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					<h4 class="modal-title" id="registerSignin-title">Sign up</h4>
+				</div>
+				<div class="modal-body">
+					<form role="form" id="registerSignIn-form">
+						<div class="form-group">
+							<label for="inputEmail">Email address</label>
+							<input type="email" class="form-control"
+										 id="inputEmail" placeholder="Enter email" name="email"/>
+						</div>
+						<div class="form-group">
+							<label for="inputPassword">Password</label>
+							<input type="password" class="form-control"
+										 id="inputPassword" placeholder="Password" name="password"/>
+						</div>
+					</form>
+				</div>
+				<div class="modal-footer" id="registerSignIn-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+					<button type="button" class="btn btn-primary" id="registerButton">Register</button>
+					<button type="button" class="btn btn-primary" id="signinButton">Sign In</button>
+				</div>
+			</div><!-- /.modal-content -->
+		</div><!-- /.modal-dialog -->
+	</div><!-- /.modal -->
 
 
 </body>

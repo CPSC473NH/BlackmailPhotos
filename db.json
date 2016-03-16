@@ -3,35 +3,40 @@
     {
       "id": 1,
       "username": "test",
-	  "password": "test",
-      "blackmails": {
-		{
-			"id": 1,
-			"releasedate": "2/22/2016 4:30:00 PST",
-			"blackmailee":{
-				"email":"t@b.com",
-				"name": "Taylor Hollingsworth"
-			}
-			"blackmailer":{
-				"email":"t@b.com",
-				"name": "Brendon Hollingsworth"
-			}
-			"title":"You suck",
-			"demands":  {
-				{
-					"id":1,
-					"completed":"false",
-					"description": "You pay me $20"
-				},
-				{
-					"id":2,
-					"completed":"false",
-					"description": "You buy me Taco Bell"
-				}
-			}
-			"picture":"/img/3opodp.jpg"
-		}
-	  }
+      "password": "test",
+      "blackmails": [
+        {
+          "id": 1,
+          "picture": "/img/3opodp.jpg",
+          "releasedate": "2/22/2016 4:30:00 PST",
+          "blackmailee": {
+            "email": "t@b.com",
+            "name": "Taylor Hollingsworth"
+          },
+          "blackmailer": {
+            "email": "t@b.com",
+            "name": "Brendon Hollingsworth"
+          },
+          "title": "You suck",
+          "demands": [
+            {
+              "id": 1,
+              "completed": "false",
+              "description": "You pay me $20"
+            },
+            {
+              "id": 2,
+              "completed": "false",
+              "description": "You buy me Taco Bell"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "username": "brendon@brendon.com",
+      "password": "test",
+      "id": 2
     }
   ]
 }
