@@ -1,0 +1,53 @@
+{
+  "accounts": [
+    {
+      "id": 1,
+      "username": "test",
+      "password": "test"
+    },
+    {
+      "username": "brendon@brendon.com",
+      "password": "test",
+      "id": 2
+    },
+    {
+      "username": "indra@email.com",
+      "password": 123456,
+      "id": 3
+    },
+    {
+      "username": "skylerlisteraley@gmail.com",
+      "password": "skyler",
+      "id": 4
+    }
+  ],
+  "blackmails": [
+    {
+      "id": 1,
+      "onwer_id": 3,
+      "picture": "/img/3opodp.jpg",
+      "releasedate": "2/22/2016 4:30:00 PST",
+      "blackmailee": {
+        "email": "t@b.com",
+        "name": "Taylor Hollingsworth"
+      },
+      "blackmailer": {
+        "email": "t@b.com",
+        "name": "Brendon Hollingsworth"
+      },
+      "title": "You suck",
+      "demands": [
+        {
+          "id": 1,
+          "completed": "false",
+          "description": "You pay me $20"
+        },
+        {
+          "id": 2,
+          "completed": "false",
+          "description": "You buy me Taco Bell"
+        }
+      ]
+    }
+  ]
+}

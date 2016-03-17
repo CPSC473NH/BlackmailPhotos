@@ -9,7 +9,8 @@ $(document).ready(function() {
   var $viewBlackmail = document.getElementById("viewBlackmail");
   var $logOut = document.getElementById("logOut");
   var $greeting = document.getElementById("greeting");
-  var $errorMsg = document.getElementById("errorMsg"); 
+  var $errorMsg = document.getElementById("errorMsg");
+  var $currentUser = ""; 
 
   $("#signup").click(function() {
     $("#signinButton").hide();
@@ -47,6 +48,46 @@ $(document).ready(function() {
     $("#registerSignIn").modal();
   });
 
+  $("#createBlackmail").click(function() {
+    $("#createModal").modal();
+  });
+
+  $("#create").click(function() {
+    var createData = _.object($("#create-form").serializeArray().map(function(v) {return [v.name, v.value];} ));
+  
+    $.post("http://localhost:3000/blackmails", {
+          "creator": $currentUser,
+          "title": createData.title,
+          "recName": createData.recName,
+          "recEmail": createData.recEmail,
+          "date": createData.date,
+          "demands": createData.demands,
+        }, function() {
+          $("#createModal").modal("hide");
+    });
+  });
+
+  $("#viewBlackmail").click(function() {
+      $.get("http://localhost:3000/blackmails", {"creator": $currentUser}, function(data) {
+        $("#mainHeader").empty().append("Your Blackmails");
+        $("#blackmailDisp").empty();
+        $("#viewList").empty();
+        for(var i = 0; i < data.length; i++)
+        {
+          var $singleMail = '<div class="col-lg-3 col-md-4 col-xs-6 thumb">';
+          $singleMail += '<a class="thumbnail" href="#">';
+          $singleMail += '<img class="img-responsive" src="http://placehold.it/400x300" alt="'+data[0].title+'"></a>';
+          $singleMail += '<ul class="list-group">';
+          $singleMail += '<li class="list-group-item">Title: '+data[0].title;
+          $singleMail += '<li class="list-group-item">Recipient Name: '+data[0].recName;
+          $singleMail += '<li class="list-group-item">Recipient Email: '+data[0].recEmail;
+          $singleMail += '<li class="list-group-item">Demands: '+data[0].demands;
+          $singleMail += '<li class="list-group-item">Release Date: '+data[0].date;
+          $("#blackmailDisp").append($singleMail);
+        }
+      });
+  });
+
   $("#signinButton").click(function() {
     var signinData = _.object($("#registerSignIn-form").serializeArray().map(function(v) {return [v.name, v.value];} ));//converts form data to associative array
       //TODO: post for signing in
@@ -65,6 +106,7 @@ $(document).ready(function() {
           $logOut.style.display = "list-item";
 
           var $greeting = '<span class="bg-primary" id="greeting">Hello, ' + data[0].username + '!</li>';
+          $currentUser = data[0].username;
           $("#navbar").append($greeting);
         }
 
@@ -77,6 +119,8 @@ $(document).ready(function() {
     $createBlackmail.style.display = "none";
     $viewBlackmail.style.display = "none";
     $logOut.style.display = "none";
+    $("#mainHeader").empty().append("Blackmail Gallery");
+    $("#blackmailDisp").empty();
     $("#greeting").remove();
   });
 });
