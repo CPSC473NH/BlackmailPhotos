@@ -33,7 +33,7 @@ $(document).ready(function() {
         });
       }
       else {
-        $("#errorMsg").text("Sign up failed. Account exist, please try again!");
+        $("#errorMsg").text("Sign up failed. Account exists, please try again!");
         $errorMsg.style.display = "block";
       }
 
