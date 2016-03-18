@@ -1,22 +1,29 @@
 <!DOCTYPE html>
 <html>
 <head>
+	<meta charset="utf-8"/>
 	<script src="http://code.jquery.com/jquery-2.0.3.min.js"></script>
 	<link href="css/bootstrap.min.css" rel="stylesheet" type="text/css">
 	<link href="css/index.css" rel="stylesheet" type="text/css">
 	<script type="text/javascript" src="js/bootstrap.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
 	<script src="js/index.js"></script>
+	<!---bootstrap-datepicker.min.js: This software is made available under the Apache License Version 2.0, January 2004: Copyright 2013, eternicode.-->
+	<!---jquery.timepicker.min.js: This software is made available under the open source MIT License. © 2014 Jon Thornton and contributors.-->
+	<link rel="stylesheet" type="text/css" href="css/jquery.timepicker.css" />
+	<link rel="stylesheet" type="text/css" href="css/bootstrap-datepicker.min.css" />
+	<script type="text/javascript" src="js/bootstrap-datepicker.min.js"></script>
+	<script type="text/javascript" src="js/jquery.timepicker.min.js"></script>
 </head>
 <body>
 	<nav class="navbar navbar-inverse navbar-fixed-top">
 		<div class="container">
 			<div class="navbar-header">
-				<a class="navbar-brand" href="#"> BlackmailPhotos </a>
+				<a class="navbar-brand" id="brand" href="#"> BlackmailPhotos </a>
 			</div>
 			<div id="navbar" class="navbar-collapse collapse">
 				<ul class="nav navbar-nav" id="navigationBar">
-					<li class="active"><a href="#">Home</a></li>
+					<li class="active" id="home"><a href="#">Home</a></li>
 					<li><a href="#" id="signup">Sign Up!</a></li>
 					<li><a href="#" id="signin">Sign In</a></li>
 					<li><a href="#" id="createBlackmail">Create Blackmail</a></li>
@@ -34,7 +41,7 @@
 		<div class="row">
 
 			<div class="col-lg-12">
-				<h1 class="page-header" id="mainHeader">Blackmail Gallery</h1>
+				<h1 class="page-header" id="mainHeader"><span class="glyphicon glyphicon-envelope " aria-hidden="true"></span> The Blackmail Gallery</h1>
 			</div>
 			<div class="container" id ="blackmailDisp">
 				<div class="col-lg-3 col-md-4 col-xs-6 thumb">
@@ -156,7 +163,7 @@
 					<p class="bg-danger" id="errorMsg"></p>
 					<form role="form" id="create-form">
 						<div class="form-group">
-							<label for="title">Title of Blackmail</label>
+							<label for="title">Title of blackmail</label>
 							<input type="text" class="form-control"
 										 id="title" placeholder="Enter Title" name="title"/>
 						</div>
@@ -171,9 +178,14 @@
 										 id="recEmail" placeholder="Recipient Email" name="recEmail"/>
 						</div>
 						<div class="form-group">
-							<label for="date">Set Release Date</label>
-							<input type="text" class="form-control"
+							<label for="date">Set release date</label>
+							<input type="text" class="form-control date"
 										 id="date" placeholder="dd/mm/yyyy" name="date"/>
+						</div>
+						<div class="form-group">
+							<label for="time">Set release time</label>
+							<input type="text" class="form-control time"
+										 id="time" placeholder="12:00 AM" name="time"/>
 						</div>
 						<div class="form-group">
 							<label for="demands">Enter your demands</label>
@@ -189,5 +201,8 @@
 			</div><!-- /.modal-content -->
 		</div><!-- /.modal-dialog -->
 	</div><!-- /.modal -->
+	<script>
+	  
+	</script>
 </body>
 </html>

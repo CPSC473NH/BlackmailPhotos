@@ -23,93 +23,37 @@
   ],
   "blackmails": [
     {
-      "id": 1,
-      "onwer_id": 3,
-      "picture": "/img/3opodp.jpg",
-      "releasedate": "2/22/2016 4:30:00 PST",
-      "blackmailee": {
-        "email": "t@b.com",
-        "name": "Taylor Hollingsworth"
-      },
-      "blackmailer": {
-        "email": "t@b.com",
-        "name": "Brendon Hollingsworth"
-      },
-      "title": "You suck",
-      "demands": [
-        {
-          "id": 1,
-          "completed": "false",
-          "description": "You pay me $20"
-        },
-        {
-          "id": 2,
-          "completed": "false",
-          "description": "You buy me Taco Bell"
-        }
-      ]
+      "creator": "skylerlisteraley@gmail.com",
+      "title": "Test 1",
+      "recName": "Some Dude",
+      "recEmail": "dude@somesite.com",
+      "date": "03/18/2016",
+      "time": "12:00 pm",
+      "demands": "All your base...",
+      "demandsMet": false,
+      "id": 1
     },
     {
-      "title": "test",
-      "recName": "test",
-      "recEmail": "test",
-      "date": "test",
-      "demands": "test",
+      "creator": "skylerlisteraley@gmail.com",
+      "title": "Test 2",
+      "recName": "Other Dude",
+      "recEmail": "otherdude@somesite.com",
+      "date": "04/21/2016",
+      "time": "10:30 am",
+      "demands": "are belong to us!",
+      "demandsMet": false,
       "id": 2
     },
     {
       "creator": "skylerlisteraley@gmail.com",
-      "title": "test",
-      "recName": "test",
-      "recEmail": "test",
-      "date": "test",
-      "demands": "test",
+      "title": "Test 3",
+      "recName": "Another Dude",
+      "recEmail": "anotherdude@somesite.com",
+      "date": "05/20/2016",
+      "time": "05:00 pm",
+      "demands": "For great justice.",
+      "demandsMet": false,
       "id": 3
-    },
-    {
-      "creator": "skylerlisteraley@gmail.com",
-      "title": "test2",
-      "recName": "test2",
-      "recEmail": "test2",
-      "date": "test2",
-      "demands": "test2",
-      "id": 4
-    },
-    {
-      "creator": "skylerlisteraley@gmail.com",
-      "title": "test2",
-      "recName": "test2",
-      "recEmail": "test2",
-      "date": "test2",
-      "demands": "test2",
-      "id": 5
-    },
-    {
-      "creator": "skylerlisteraley@gmail.com",
-      "title": "test2",
-      "recName": "test2",
-      "recEmail": "test2",
-      "date": "test2",
-      "demands": "test2",
-      "id": 6
-    },
-    {
-      "creator": "skylerlisteraley@gmail.com",
-      "title": "test2",
-      "recName": "test2",
-      "recEmail": "test2",
-      "date": "test2",
-      "demands": "test2",
-      "id": 7
-    },
-    {
-      "creator": "skylerlisteraley@gmail.com",
-      "title": "test2",
-      "recName": "test2",
-      "recEmail": "test2",
-      "date": "test2",
-      "demands": "test2",
-      "id": 8
     }
   ]
 }
