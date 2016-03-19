@@ -43,17 +43,6 @@
       "demands": "are belong to us!",
       "demandsMet": false,
       "id": 2
-    },
-    {
-      "creator": "skylerlisteraley@gmail.com",
-      "title": "test 3",
-      "recName": "another dude",
-      "recEmail": "anotherdude@somesite.com",
-      "date": "07/14/2016",
-      "time": "02:00 am",
-      "demands": "For Great Justice!",
-      "demandsMet": false,
-      "id": 3
     }
   ]
 }
