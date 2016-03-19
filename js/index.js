@@ -83,6 +83,9 @@ $(document).ready(function() {
     });
   });
 
+ 
+  document.ready
+
   $("#viewBlackmail").click(function() {
       $.get("http://localhost:3000/blackmails", {"creator": $currentUser}, function(data) {
         $("#mainHeader").empty().append('<span class="glyphicon glyphicon-envelope " aria-hidden="true"></span> Your Blackmails');
@@ -92,10 +95,10 @@ $(document).ready(function() {
         {
           var deadline = 'December 31 2016';
           var $singleMail = '<div class="col-lg-3 col-md-4 col-xs-6 thumb">';
-          $singleMail += '<a class="thumbnail" href="#">';
+          $singleMail += '<a class="thumbnail" onclick="showSingleBlackmail('+data[i].id+')" href="javascript:void(0)">';
           $singleMail += '<img class="img-responsive" src="http://placehold.it/400x300" alt="'+data[i].title+'"></a>';
           $singleMail += '<ul class="list-group">';
-          $singleMail += '<li class="list-group-item"><b>Title</b>: '+data[i].title;
+          $singleMail += '<li class="list-group-item" id="'+data[i].id+'"><b>Title</b>: '+data[i].title;
           $singleMail += '<li class="list-group-item"><b>Recipient Name</b>: '+data[i].recName;
           $singleMail += '<li class="list-group-item"><b>Recipient Email</b>: '+data[i].recEmail;
           $singleMail += '<li class="list-group-item"><b>Demands</b>: '+data[i].demands;
@@ -166,3 +169,59 @@ $(document).ready(function() {
     }
   }
 });
+
+function showSingleBlackmail($id) {
+  console.log("showSingleblackmail is clicked");
+  $.get("http://localhost:3000/blackmails", {"id": $id}, function(data) {
+    $("#mainHeader").empty().append('<span class="glyphicon glyphicon-envelope" aria-hidden="true"></span> ' + data[0].title);
+    $("#blackmailDisp").empty();
+    $("#viewList").empty();
+
+    var $deadline = data[0].date;
+
+    var $singleBlackmailPage = '<div id="clockdiv" class="col-md-4">';
+    $singleBlackmailPage += '<div>';
+    $singleBlackmailPage += '<span class="days"></span>';
+    $singleBlackmailPage += '<div class="smalltext">Days</div>';
+    $singleBlackmailPage += '</div>';
+    $singleBlackmailPage += '<div>';
+    $singleBlackmailPage += '<span class="hours"></span>';
+    $singleBlackmailPage += '<div class="smalltext">Hours</div>';
+    $singleBlackmailPage += '</div>';
+    $singleBlackmailPage += '<div>';
+    $singleBlackmailPage += '<span class="minutes"></span>';
+    $singleBlackmailPage += '<div class="smalltext">Minutes</div>';
+    $singleBlackmailPage += '</div>';
+    $singleBlackmailPage += '<div>';
+    $singleBlackmailPage += '<span class="seconds"></span>';
+    $singleBlackmailPage += '<div class="smalltext">Seconds</div>';
+    $singleBlackmailPage += '</div></div><br/><br/>';
+
+    $singleBlackmailPage +='<div class="col-md-12"><img class="thumbnail img-responsive" src="http://placehold.it/600x500" alt="no-image"></img></div>';
+    
+    $singleBlackmailPage += '<div class="col-md-6">';
+    $singleBlackmailPage += '<ul class="list-group">';
+    $singleBlackmailPage += '<li class="list-group-item"><b>Recipient Name</b>: '+data[0].recName;
+    $singleBlackmailPage += '<li class="list-group-item"><b>Recipient Email</b>: '+data[0].recEmail;
+    $singleBlackmailPage += '<li class="list-group-item"><b>Demands</b>: '+data[0].demands;
+    var $icon = '<span class="glyphicon glyphicon-remove " style="color:red" aria-hidden="true"></span>';
+    if(data[0].demandsMet){
+      $icon = '<span class="glyphicon glyphicon-ok green" style="color:green" aria-hidden="true"></span>';
+    }
+    $singleBlackmailPage += '<li class="list-group-item"><b>Demands Met? </b>: '+$icon+ '<button class="btn btn-success" id="demandButton" onclick="updateDemandStatus('+data[0].id+')">Demands Met!</button>';
+    $singleBlackmailPage += '<li class="list-group-item"><b>Release Date</b>: '+data[0].date;
+    $singleBlackmailPage += '<li class="list-group-item"><b>Release Time</b>: '+data[0].time;
+
+    $("#blackmailDisp").append($singleBlackmailPage);
+
+    var deadline2 = new Date(Date.parse(new Date()) + 15 * 24 * 60 * 60 * 1000);
+    console.log(deadline2);
+    console.log($deadline);
+    initializeClock('clockdiv', $deadline);
+  });
+}
+
+function updateDemandStatus ($id) {
+    console.log("demand button is clicked");
+    //$.post("localhost:3000/blackmails", {})
+}
