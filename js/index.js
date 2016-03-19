@@ -83,8 +83,6 @@ $(document).ready(function() {
     });
   });
 
- 
-  document.ready
 
   $("#viewBlackmail").click(function() {
       $.get("http://localhost:3000/blackmails", {"creator": $currentUser}, function(data) {
@@ -233,7 +231,7 @@ function deleteBlackmail($id) {
     }).fail(function (err) {
 
     });
-};
+}
 
 function updateDemandStatus ($id) {
     console.log("demand button is clicked");
@@ -251,7 +249,7 @@ function updateDemandStatus ($id) {
           "demands": data[0].demands,
           "demandsMet": true,
           "id": data[0].id
-        },
+        }
        }).done(function (response) {
         
        }).fail(function (err) {
