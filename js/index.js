@@ -109,6 +109,8 @@ $(document).ready(function() {
           $singleMail += '<li class="list-group-item"><b>Demands Met? </b>: '+$icon;
           $singleMail += '<li class="list-group-item"><b>Release Date</b>: '+data[i].date;
           $singleMail += '<li class="list-group-item"><b>Release Time</b>: '+data[i].time;
+          $singleMail += '<li class="list-group-item"><b>Delete Blackmail? </b>';
+          $singleMail += '<button id="delete" type="button" onclick ="deleteBlackmail('+data[i].id+')" class="btn btn-default btn-lg"><span class="glyphicon glyphicon-trash" style="color:blue" aria-hidden="true"></span>';
           $("#blackmailDisp").append($singleMail);
         }
       });
@@ -211,7 +213,8 @@ function showSingleBlackmail($id) {
     $singleBlackmailPage += '<li class="list-group-item"><b>Demands Met? </b>: '+$icon+ '<button class="btn btn-success" id="demandButton" onclick="updateDemandStatus('+data[0].id+')">Demands Met!</button>';
     $singleBlackmailPage += '<li class="list-group-item"><b>Release Date</b>: '+data[0].date;
     $singleBlackmailPage += '<li class="list-group-item"><b>Release Time</b>: '+data[0].time;
-
+    $singleBlackmailPage += '<li class="list-group-item"><b>Delete Blackmail? </b>';
+    $singleBlackmailPage += '<button id="delete" type="button" onclick ="deleteBlackmail('+data[0].id+')" class="btn btn-default btn-lg"><span class="glyphicon glyphicon-trash" style="color:blue" aria-hidden="true"></span>';
     $("#blackmailDisp").append($singleBlackmailPage);
 
     var deadline2 = new Date(Date.parse(new Date()) + 15 * 24 * 60 * 60 * 1000);
@@ -221,7 +224,38 @@ function showSingleBlackmail($id) {
   });
 }
 
+function deleteBlackmail($id) {
+  $.ajax({
+    "url" : "http://localhost:3000/blackmails/"+$id,
+    "type" : "DELETE"
+    }).done(function (response) {
+        
+    }).fail(function (err) {
+
+    });
+};
+
 function updateDemandStatus ($id) {
     console.log("demand button is clicked");
-    //$.post("localhost:3000/blackmails", {})
+    $.get("http://localhost:3000/blackmails", {"id": $id}, function(data) {
+        $.ajax({
+        "url" : "http://localhost:3000/blackmails/"+$id,
+        "type" : "PUT",
+        "data" : {
+          "creator": data[0].creator,
+          "title": data[0].title,
+          "recName": data[0].recName,
+          "recEmail": data[0].recEmail,
+          "date": data[0].date,
+          "time": data[0].time,
+          "demands": data[0].demands,
+          "demandsMet": true,
+          "id": data[0].id
+        },
+       }).done(function (response) {
+        
+       }).fail(function (err) {
+
+       });
+    });
 }

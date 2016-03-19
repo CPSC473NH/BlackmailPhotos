@@ -30,7 +30,7 @@
       "date": "03/18/2016",
       "time": "12:00 pm",
       "demands": "All your base...",
-      "demandsMet": false,
+      "demandsMet": true,
       "id": 1
     },
     {
@@ -38,20 +38,20 @@
       "title": "Test 2",
       "recName": "Other Dude",
       "recEmail": "otherdude@somesite.com",
-      "date": "04/21/2016",
-      "time": "10:30 am",
+      "date": "03/31/2016",
+      "time": "02:00 am",
       "demands": "are belong to us!",
       "demandsMet": false,
       "id": 2
     },
     {
       "creator": "skylerlisteraley@gmail.com",
-      "title": "Test 3",
-      "recName": "Another Dude",
+      "title": "test 3",
+      "recName": "another dude",
       "recEmail": "anotherdude@somesite.com",
-      "date": "05/20/2016",
-      "time": "05:00 pm",
-      "demands": "For great justice.",
+      "date": "07/14/2016",
+      "time": "02:00 am",
+      "demands": "For Great Justice!",
       "demandsMet": false,
       "id": 3
     }
