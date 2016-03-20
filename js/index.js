@@ -171,15 +171,37 @@ $(document).ready(function() {
 });
 
 function showSingleBlackmail($id) {
-  console.log("showSingleblackmail is clicked");
   $.get("http://localhost:3000/blackmails", {"id": $id}, function(data) {
     $("#mainHeader").empty().append('<span class="glyphicon glyphicon-envelope" aria-hidden="true"></span> ' + data[0].title);
     $("#blackmailDisp").empty();
     $("#viewList").empty();
 
     var $deadline = data[0].date;
+    var $timeCon = data[0].time;
+    $deadline += ' ';
 
-    var $singleBlackmailPage = '<div id="clockdiv" class="col-md-4">';
+    if ($timeCon.indexOf("pm") != -1){
+      if($timeCon.indexOf("12") != -1)
+      {
+        $deadline += $timeCon.substring(0, 5)+':00';
+      }else{
+        $deadline += (parseInt($timeCon.substring(0, 2))+12)+$timeCon.substring(2, 5)+':00';
+      }
+      
+    }
+    else{
+      if($timeCon.indexOf("12") != -1)
+      {
+        $deadline += '00'+$timeCon.substring(2, 5)+':00';
+      }
+      else{
+        $deadline += $timeCon.substring(0, 5)+':00';
+      }
+      
+    }
+    
+    var $singleBlackmailPage = '<h1 class="col-md-12">Photo Releases in: </h1>';
+    $singleBlackmailPage += '<div id="clockdiv" class="col-md-12">';
     $singleBlackmailPage += '<div>';
     $singleBlackmailPage += '<span class="days"></span>';
     $singleBlackmailPage += '<div class="smalltext">Days</div>';
@@ -195,7 +217,7 @@ function showSingleBlackmail($id) {
     $singleBlackmailPage += '<div>';
     $singleBlackmailPage += '<span class="seconds"></span>';
     $singleBlackmailPage += '<div class="smalltext">Seconds</div>';
-    $singleBlackmailPage += '</div></div><br/><br/>';
+    $singleBlackmailPage += '</div></div>';
 
     $singleBlackmailPage +='<div class="col-md-12"><img class="thumbnail img-responsive" src="http://placehold.it/600x500" alt="no-image"></img></div>';
     
@@ -204,11 +226,11 @@ function showSingleBlackmail($id) {
     $singleBlackmailPage += '<li class="list-group-item"><b>Recipient Name</b>: '+data[0].recName;
     $singleBlackmailPage += '<li class="list-group-item"><b>Recipient Email</b>: '+data[0].recEmail;
     $singleBlackmailPage += '<li class="list-group-item"><b>Demands</b>: '+data[0].demands;
-    var $icon = '<span class="glyphicon glyphicon-remove " style="color:red" aria-hidden="true"></span>';
+    var $icon = '<span id="metSymbol" class="glyphicon glyphicon-remove " style="color:red" aria-hidden="true"></span>';
     if(data[0].demandsMet){
-      $icon = '<span class="glyphicon glyphicon-ok green" style="color:green" aria-hidden="true"></span>';
+      $icon = '<span id="metSymbol" class="glyphicon glyphicon-ok green" style="color:green" aria-hidden="true"></span>';
     }
-    $singleBlackmailPage += '<li class="list-group-item"><b>Demands Met? </b>: '+$icon+ '<button class="btn btn-success" id="demandButton" onclick="updateDemandStatus('+data[0].id+')">Demands Met!</button>';
+    $singleBlackmailPage += '<li class="list-group-item"><b>Demands Met? </b>: '+$icon+ '          <div class="btn-group"><button class="btn btn-danger" id="demandButton2" onclick="updateDemandStatus('+data[0].id+')">Demands Not Met!</button><button class="btn btn-success" id="demandButton" onclick="updateDemandStatus('+data[0].id+')">Demands Met!</button>';
     $singleBlackmailPage += '<li class="list-group-item"><b>Release Date</b>: '+data[0].date;
     $singleBlackmailPage += '<li class="list-group-item"><b>Release Time</b>: '+data[0].time;
     $singleBlackmailPage += '<li class="list-group-item"><b>Delete Blackmail? </b>';
@@ -216,8 +238,6 @@ function showSingleBlackmail($id) {
     $("#blackmailDisp").append($singleBlackmailPage);
 
     var deadline2 = new Date(Date.parse(new Date()) + 15 * 24 * 60 * 60 * 1000);
-    console.log(deadline2);
-    console.log($deadline);
     initializeClock('clockdiv', $deadline);
   });
 }
@@ -234,7 +254,9 @@ function deleteBlackmail($id) {
 }
 
 function updateDemandStatus ($id) {
-    console.log("demand button is clicked");
+    //$("#metSymbol").switchClass("glyphicon-remove, glyphicon-ok green");
+    //$("#metSymbol").switchClass("glyphicon-ok green, glyphicon-remove");
+
     $.get("http://localhost:3000/blackmails", {"id": $id}, function(data) {
         $.ajax({
         "url" : "http://localhost:3000/blackmails/"+$id,
@@ -247,7 +269,7 @@ function updateDemandStatus ($id) {
           "date": data[0].date,
           "time": data[0].time,
           "demands": data[0].demands,
-          "demandsMet": true,
+          "demandsMet": !data[0].demandMet,
           "id": data[0].id
         }
        }).done(function (response) {
