@@ -73,7 +73,6 @@ $(document).ready(function() {
 
   $("#create").click(function() {
       var createData = _.object($("#create-form").serializeArray().map(function(v) {return [v.name, v.value];} ));
-      document.getElementById('fileinput').addEventListener('change', readSingleFile, false);
       
       var $temp = randomString(32, '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ');
 

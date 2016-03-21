@@ -11,12 +11,6 @@ app.listen(8000, function () {
   console.log('Blackmail app listening on port 8000!');
 });
 // set up our routes
-app.get("/hello", function (req, res) {
-  res.send("Hello World!");
-});
-app.get("/goodbye", function (req, res) {
-  res.send("Goodbye World!");
-});
 app.post('/upload', upload.single('image'), function(req,res){
   console.log(req.file);
   console.log(req.body); // form fields
