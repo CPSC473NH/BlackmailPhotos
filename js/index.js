@@ -166,6 +166,20 @@ $(document).ready(function() {
     makeGallery();
   });
 
+  $("#about").click(function() {
+    showAbout();
+  });
+
+  function showAbout(){
+    $("#mainHeader").empty().append('<span aria-hidden="true"></span> About');
+    $("#blackmailDisp").empty();
+    var $aboutContents ='<div>Herrooooo</div>'
+  }
+
+  $("#contact").click(function() {
+    makeGallery();
+  });
+
   function makeGallery(){
     $("#mainHeader").empty().append('<span class="glyphicon glyphicon-envelope " aria-hidden="true"></span> The Blackmail Gallery');
     $("#blackmailDisp").empty();
@@ -177,7 +191,8 @@ $(document).ready(function() {
         $("#blackmailDisp").append($singleMail);
     }
   }
-});
+
+}); //End of document.ready
 
 function makeMyBlackmails(){
       $.get("http://localhost:3000/blackmails", {"creator": $currentUser}, function(data) {
