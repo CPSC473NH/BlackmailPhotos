@@ -9,3 +9,4 @@ First time set up with Node.js:
 
 After completing first time setup:
 1. In the same directory, run 'nodemon' (nodemon lets you update the server while its live!)
+2. Run json-server db.json
