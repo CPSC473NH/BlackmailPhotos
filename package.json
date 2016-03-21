@@ -1,0 +1,17 @@
+{
+  "name": "blackmail",
+  "version": "0.0.1",
+  "description": "website to blackmail people",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.13.4",
+    "multer": "^1.1.0",
+    "nodemon": "^1.9.1"
+  }
+}

@@ -171,16 +171,17 @@
 				</div>
 				<div class="modal-body">
 					<p class="bg-danger" id="createBlackmail-errorMsg"></p>
-					<form role="form" id="create-form">
+					<form role="form" id="create-form" action="/upload" method="POST" enctype="multipart/form-data">
 						<div class="form-group">
 							<label for="title">Title of blackmail</label>
 							<input type="text" class="form-control"
 										 id="title" placeholder="Enter Title" name="title"/>
 						</div>
 						<div class="form-group">
-							<label for="url">URL of hosted photo</label>
-							<input type="text" class="form-control"
-										 id="url" placeholder="Enter URL of hosted photo" name="url"/>
+							<!--<form action="/upload" method="POST" enctype="multipart/form-data">-->
+							<label for="fileinput">Upload</label>
+							<input type="file" id="fileinput" name="file" class="form-control"/><output id="list"></output>
+							<!--</form>-->
 						</div>
 						<div class="form-group">
 							<label for="recName">Name of blackmail recipient</label>

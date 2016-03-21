@@ -67,11 +67,13 @@ $(document).ready(function() {
   $("#createBlackmail").click(function() {
     $("#createModal").modal();
   });
+    
 
   $("#create").click(function() {
-    var createData = _.object($("#create-form").serializeArray().map(function(v) {return [v.name, v.value];} ));
-
-    var $temp = randomString(32, '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ');
+      var createData = _.object($("#create-form").serializeArray().map(function(v) {return [v.name, v.value];} ));
+      document.getElementById('fileinput').addEventListener('change', readSingleFile, false);
+      
+      var $temp = randomString(32, '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ');
 
     //Not working yet: code to check if random string already tied to another blackmail
     //var $looper = true;
