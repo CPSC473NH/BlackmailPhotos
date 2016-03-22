@@ -1,6 +1,6 @@
 *.iml
 *.xml
 .idea/.name
-db - Copy.json
 *.html___jb_tmp___
 *.js___jb_tmp___
+node_modules/
