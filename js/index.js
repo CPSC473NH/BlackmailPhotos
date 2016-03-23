@@ -171,9 +171,11 @@ $(document).ready(function() {
   });
 
   function showAbout(){
-    $("#mainHeader").empty().append('<span aria-hidden="true"></span> About');
+    $("#mainHeader").empty().append('<span class="glyphicon glyphicon-glass" aria-hidden="true"></span> About');
     $("#blackmailDisp").empty();
     var $aboutContents ='<div>Herrooooo</div>'
+
+    $("#blackmailDisp").append($aboutContents);
   }
 
   $("#contact").click(function() {
