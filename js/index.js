@@ -173,14 +173,26 @@ $(document).ready(function() {
   function showAbout(){
     $("#mainHeader").empty().append('<span class="glyphicon glyphicon-glass" aria-hidden="true"></span> About');
     $("#blackmailDisp").empty();
-    var $aboutContents ='<div>Herrooooo</div>'
+    var $aboutContents ='<div>Hello!<br><br>BlackmailPhotos offers a great and easy way to extort your friends, family, coworkers, employers, and even yourself!</div>';
 
     $("#blackmailDisp").append($aboutContents);
   }
 
   $("#contact").click(function() {
-    makeGallery();
+    showContact();
   });
+
+  function showContact(){
+    $("#mainHeader").empty().append('<span class="glyphicon glyphicon-phone-alt" aria-hidden="true"></span> Contact');
+    $("#blackmailDisp").empty();
+    var $contactInfo ='<div>Please address all complaints and legal threats to:<br><br>';
+    $contactInfo += 'Former Vice President Dick Cheney<br>';
+    $contactInfo += 'The American Interprise Institute<br>';
+    $contactInfo += '1150 Seventeenth Street, N.W.<br>';
+    $contactInfo += 'Washington, DC 20036</div>';
+
+    $("#blackmailDisp").append($contactInfo);
+  }
 
   function makeGallery(){
     $("#mainHeader").empty().append('<span class="glyphicon glyphicon-envelope " aria-hidden="true"></span> The Blackmail Gallery');
