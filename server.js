@@ -15,5 +15,6 @@ app.post('/upload', upload.single('image'), function(req,res){
   console.log(req.file);
   console.log(req.body); // form fields
   console.log(req.files); // form files
-  res.status(204).end()
+  res.send(req.file.filename);
+  res.status(200).end()
 });

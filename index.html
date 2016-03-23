@@ -173,7 +173,7 @@
 				</div>
 				<div class="modal-body">
 					<p class="bg-danger" id="createBlackmail-errorMsg"></p>
-					<form role="form" id="create-form" action="/upload" method="POST" enctype="multipart/form-data">
+					<form role="form" id="create-form">
 						<div class="form-group">
 							<label for="title">Title of blackmail</label>
 							<input type="text" class="form-control"
@@ -204,14 +204,12 @@
 							<input type="text" class="form-control"
 										 id="demands" placeholder="Demands" name="demands"/>
 						</div>
+						<div class="form-group">
+						<form id="imageForm" enctype="multipart/form-data">
+      						<input id="image" type="file" class="file"><br/>
+							<button type="button" class="btn btn-primary" id="upload">Upload</button>
+						</div>
 					</form>
-					<div class="form-group">
-						<form action="/upload" method="POST" enctype="multipart/form-data">
-							Select an image to upload:
-							<input type="file" name="image">
-							<input type="submit" value="Upload Image">
-						</form>
-					</div>
 				</div>
 				<div class="modal-footer" id="createBlackmail-footer">
 					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>

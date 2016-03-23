@@ -147,6 +147,25 @@ $(document).ready(function() {
     });
   });
 
+  $("#upload").click(function() {
+    var fileInput = document.getElementById('image');
+    var file = fileInput.files[0];
+    var formData = new FormData();
+    formData.append('file', file);
+
+    console.log(file);
+    $.ajax({
+      type: 'POST',
+      url: '/upload',
+      processData: false,
+      contentType: false,
+      data: {"image" : file},
+      success: function (response, textStatus, jqXHR){
+        console.log(response);
+      }
+    });
+  });
+
   $("#logOut").click(function() {
     $currentUser = "";
     $signup.style.display = "list-item";
