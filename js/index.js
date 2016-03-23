@@ -272,7 +272,9 @@ $(document).ready(function() {
     });
   }
 
-  function makeMyBlackmails(){
+}); //End of document.ready
+
+function makeMyBlackmails(){
       $.get("http://localhost:3000/blackmails", {"creator": $currentUser}, function(data) {
       $("#mainHeader").empty().append('<span class="glyphicon glyphicon-envelope " aria-hidden="true"></span> Your Blackmails');
       $("#blackmailDisp").empty();
@@ -473,6 +475,3 @@ function updateDemandStatus ($id) {
        });
     });
 }
-
-}); //End of document.ready
-
