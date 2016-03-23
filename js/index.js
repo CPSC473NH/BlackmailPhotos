@@ -46,9 +46,9 @@ $(document).ready(function() {
           "password": registrationData.password
         }, function() {
           //put an alert in here for now
-          $("#registerSignIn").modal();
-          $("#inputEmail").empty();
-          $("#inputPassword").empty();
+          $("#registerSignIn").modal("hide");
+          $("#inputEmail").val("");
+          $("#inputPassword").val("");
         });
       }
       else {
