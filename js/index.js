@@ -380,7 +380,6 @@ function showSingleBlackmail($id) {
       $singleBlackmailPage += '<span class="seconds"></span>';
       $singleBlackmailPage += '<div class="smalltext">Seconds</div>';
       $singleBlackmailPage += '</div></div>';
-      initializeClock('clockdiv', $deadline);
     }  
 
     $singleBlackmailPage +='<div class="col-md-12"><img class="thumbnail img-responsive" src="/upload/'+data[0].url+'.jpg" alt=""></img></div>';
@@ -414,7 +413,9 @@ function showSingleBlackmail($id) {
       $singleBlackmailPage += '<li class="list-group-item"><b>Delete Blackmail? </b>';
       $singleBlackmailPage += '<button id="delete" type="button" onclick ="deleteBlackmail('+data[0].id+')" class="btn btn-default btn-lg"><span class="glyphicon glyphicon-trash" style="color:blue" aria-hidden="true"></span>';
     }
+
     $("#blackmailDisp").append($singleBlackmailPage);
+    initializeClock('clockdiv', $deadline);
   });
 }
 
