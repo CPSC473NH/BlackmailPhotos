@@ -415,7 +415,10 @@ function showSingleBlackmail($id) {
     }
 
     $("#blackmailDisp").append($singleBlackmailPage);
-    initializeClock('clockdiv', $deadline);
+    if (getTimeRemaining($deadline).total >= 0){
+      initializeClock('clockdiv', $deadline);
+    }
+
   });
 }
 
