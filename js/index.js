@@ -1,5 +1,6 @@
 //GLYPHICONS Halflings font is also released as an extension of a Bootstrap www.getbootstrap.com for free and it is released under the same license as Bootstrap. 
 //Thank you to GLYPHICONS.com for GLYPHICONS Halflings
+///www.pexels.com/search/people/ All these free images of people can be used according to the Creative Commons Zero (CC0) 
 var $currentUser = ""; 
 
 $(document).ready(function() {
@@ -13,6 +14,11 @@ $(document).ready(function() {
   var $greeting = document.getElementById("greeting");
   var $errorMsg = document.getElementById("errorMsg");
 
+  var initialLoad = false;
+  if(!initialLoad){
+    makeGallery();
+    initialLoad = true;
+  }
 
   // initialize input widgets first
   $("#createModal .time").timepicker({
@@ -132,6 +138,7 @@ $(document).ready(function() {
           var $greeting = '<span class="text-primary" id="greeting">Hello, ' + data[0].username + '!</li>';
           $currentUser = data[0].username;
           $("#navbar").append($greeting);
+          makeMyBlackmails();
         }
 
       });
@@ -214,15 +221,55 @@ $(document).ready(function() {
   }
 
   function makeGallery(){
-    $("#mainHeader").empty().append('<span class="glyphicon glyphicon-envelope " aria-hidden="true"></span> The Blackmail Gallery');
-    $("#blackmailDisp").empty();
-    var $singleMail ='<div class="col-lg-3 col-md-4 col-xs-6 thumb">'
-    $singleMail += '<a class="thumbnail" href="#">';
-    $singleMail += '<img class="img-responsive" src="http://placehold.it/400x300" alt="">';
-    for(var i = 0; i < 12; i++)
-    {
-        $("#blackmailDisp").append($singleMail);
-    }
+      $.get("http://localhost:3000/blackmails", function(data) {
+      $("#mainHeader").empty().append('<span class="glyphicon glyphicon-envelope " aria-hidden="true"></span> Released Blackmail Photos');
+      $("#blackmailDisp").empty();
+      if (data.length > 0){
+        for(var i = 0; i < data.length; i++)
+        {
+          var $deadline = data[i].date;
+          var $timeCon = data[i].time;
+          $deadline += ' ';
+
+          if ($timeCon.indexOf("pm") != -1){
+            if($timeCon.indexOf("12") != -1)
+            {
+              $deadline += $timeCon.substring(0, 5)+':00';
+            }else{
+              $deadline += (parseInt($timeCon.substring(0, 2))+12)+$timeCon.substring(2, 5)+':00';
+            }
+            
+          }
+          else{
+            if($timeCon.indexOf("12") != -1)
+            {
+              $deadline += '00'+$timeCon.substring(2, 5)+':00';
+            }
+            else{
+              $deadline += $timeCon.substring(0, 5)+':00';
+            }
+            
+          }
+
+          if (getTimeRemaining($deadline).total <= 0){
+            var $singleMail = '<div class="col-lg-3 col-md-4 col-xs-6 thumb">';
+            $singleMail += '<a class="thumbnail" onclick="showGalleryBlackmail('+data[i].id+')" href="javascript:void(0)">';
+            $singleMail += '<img class="img-responsive" style="max-width:50%;max-height:50%;" src="/upload/'+data[i].url+'.jpg" alt="'+data[i].title+'"></a>';
+            $singleMail += '<ul class="list-group">';
+            $singleMail += '<li class="list-group-item" id="'+data[i].id+'"><b>Title</b>: '+data[i].title;
+            $singleMail += '<li class="list-group-item"><b>Person in the Photo</b>:<br>'+data[i].recName;
+            $singleMail += '<li class="list-group-item"><b>Recipient Email</b>: '+data[i].recEmail;
+            $singleMail += '<li class="list-group-item"><b>Release Date</b>: '+data[i].date;
+            $singleMail += '<li class="list-group-item"><b>Release Time</b>: '+data[i].time;
+            $("#blackmailDisp").append($singleMail);
+          }
+        }
+      }
+      else{
+          $("#blackmailDisp").append('<h1 style="color:red">No Current Blackmails Found');
+      }
+
+    });
   }
 
 }); //End of document.ready
@@ -234,12 +281,13 @@ function makeMyBlackmails(){
       if (data.length > 0){
         for(var i = 0; i < data.length; i++)
         {
-          var $singleMail = '<div class="col-lg-3 col-md-4 col-xs-6 thumb">';
+          var $singleMail = "";
+          $singleMail += '<div class="col-lg-3 col-md-4 col-xs-6 thumb">';
           $singleMail += '<a class="thumbnail" onclick="showSingleBlackmail('+data[i].id+')" href="javascript:void(0)">';
-          $singleMail += '<img class="img-responsive" style="max-width:25%;max-height:25%;" src="'+data[i].url+'" alt="'+data[i].title+'"></a>';
+          $singleMail += '<img class="img-responsive" style="max-width:50%;max-height:50%;" src="/upload/'+data[i].url+'.jpg" alt="'+data[i].title+'"></a>';
           $singleMail += '<ul class="list-group">';
           $singleMail += '<li class="list-group-item" id="'+data[i].id+'"><b>Title</b>: '+data[i].title;
-          $singleMail += '<li class="list-group-item"><b>Recipient Name</b>: '+data[i].recName;
+          $singleMail += '<li class="list-group-item"><b>Recipient Name</b>:<br>'+data[i].recName;
           $singleMail += '<li class="list-group-item"><b>Recipient Email</b>: '+data[i].recEmail;
           $singleMail += '<li class="list-group-item"><b>Demands</b>: '+data[i].demands;
           var $icon = '<span class="glyphicon glyphicon-remove " style="color:red;font-size: 25px;" aria-hidden="true"></span>';
@@ -259,6 +307,25 @@ function makeMyBlackmails(){
       }
 
     });
+}
+
+function showGalleryBlackmail($id) {
+  $.get("http://localhost:3000/blackmails", {"id": $id}, function(data) {
+    $("#mainHeader").empty().append('<span class="glyphicon glyphicon-envelope" aria-hidden="true"></span>' + data[0].title);
+    $("#blackmailDisp").empty();
+    var $singleBlackmailPage = '';
+    $singleBlackmailPage += '<h1 class="col-md-12" style="color:red;font-size: 75px;">Photo Released</h1>';  
+
+    $singleBlackmailPage +='<div class="col-md-12"><img class="thumbnail img-responsive" src="/upload/'+data[0].url+'.jpg" alt=""></img></div>';
+    
+    $singleBlackmailPage += '<div class="col-md-6">';
+    $singleBlackmailPage += '<ul class="list-group">';
+    $singleBlackmailPage += '<li class="list-group-item"><b>Recipient Name</b>:<br>'+data[0].recName;
+    $singleBlackmailPage += '<li class="list-group-item"><b>Recipient Email</b>: '+data[0].recEmail;
+    $singleBlackmailPage += '<li class="list-group-item"><b>Release Date</b>: '+data[0].date;
+    $singleBlackmailPage += '<li class="list-group-item"><b>Release Time</b>: '+data[0].time;
+    $("#blackmailDisp").append($singleBlackmailPage);
+  });
 }
 
 function showSingleBlackmail($id) {
@@ -313,13 +380,14 @@ function showSingleBlackmail($id) {
       $singleBlackmailPage += '<span class="seconds"></span>';
       $singleBlackmailPage += '<div class="smalltext">Seconds</div>';
       $singleBlackmailPage += '</div></div>';
+      initializeClock('clockdiv', $deadline);
     }  
 
-    $singleBlackmailPage +='<div class="col-md-12"><img class="thumbnail img-responsive" src="'+data[0].url+'" alt=""></img></div>';
+    $singleBlackmailPage +='<div class="col-md-12"><img class="thumbnail img-responsive" src="/upload/'+data[0].url+'.jpg" alt=""></img></div>';
     
     $singleBlackmailPage += '<div class="col-md-6">';
     $singleBlackmailPage += '<ul class="list-group">';
-    $singleBlackmailPage += '<li class="list-group-item"><b>Recipient Name</b>: '+data[0].recName;
+    $singleBlackmailPage += '<li class="list-group-item"><b>Recipient Name</b>:<br>'+data[0].recName;
     $singleBlackmailPage += '<li class="list-group-item"><b>Recipient Email</b>: '+data[0].recEmail;
     $singleBlackmailPage += '<li class="list-group-item"><b>Demands</b>: '+data[0].demands;
     var $icon = '<span id="metSymbol" class="glyphicon glyphicon-remove " style="color:red;font-size: 50px;" aria-hidden="true"></span>';
@@ -329,7 +397,14 @@ function showSingleBlackmail($id) {
     $singleBlackmailPage += '<li class="list-group-item"><b>Are The Demands Met? </b>: '+$icon;
     
     if($currentUser != ""){
-          $singleBlackmailPage += '<li class="list-group-item"><b>Update Demand Status </b>: <div class="btn-group"><button class="btn btn-danger" id="demandButton2" onclick="updateDemandStatus('+data[0].id+')">Demands Not Met!</button><button class="btn btn-success" id="demandButton" onclick="updateDemandStatus('+data[0].id+')">Demands Met!</button>';
+          $singleBlackmailPage += '<li class="list-group-item"><b>Update Demand Status </b>: <div class="btn-group">';
+          if(data[0].demandsMet){
+            $singleBlackmailPage += '<button class="btn btn-danger" id="demandButton" onclick="updateDemandStatus('+data[0].id+')">Demands Not Met!</button>';
+          }
+          else{
+            $singleBlackmailPage += '<button class="btn btn-success" id="demandButton" onclick="updateDemandStatus('+data[0].id+')">Demands Met!</button>';
+          }
+          
     } 
     
     $singleBlackmailPage += '<li class="list-group-item"><b>Release Date</b>: '+data[0].date;
@@ -340,7 +415,6 @@ function showSingleBlackmail($id) {
       $singleBlackmailPage += '<button id="delete" type="button" onclick ="deleteBlackmail('+data[0].id+')" class="btn btn-default btn-lg"><span class="glyphicon glyphicon-trash" style="color:blue" aria-hidden="true"></span>';
     }
     $("#blackmailDisp").append($singleBlackmailPage);
-    initializeClock('clockdiv', $deadline);
   });
 }
 
@@ -367,10 +441,14 @@ function updateDemandStatus ($id) {
     if($("#metSymbol").css("color") == "rgb(0, 128, 0)"){
       $("#metSymbol").css("color", "red");
       $("#metSymbol").switchClass("glyphicon-ok green", "glyphicon-remove");
+      $("#demandButton").switchClass("btn-danger","btn-success");
+      $("#demandButton").text("Demands Met!");
     }
     else{
       $("#metSymbol").css("color", "green");
       $("#metSymbol").switchClass("glyphicon-remove", "glyphicon-ok green");
+      $("#demandButton").switchClass("btn-success","btn-danger");
+      $("#demandButton").text("Demands Not Met!");
     }   
 
     $.get("http://localhost:3000/blackmails", {"id": $id}, function(data) {
@@ -385,7 +463,7 @@ function updateDemandStatus ($id) {
           "date": data[0].date,
           "time": data[0].time,
           "demands": data[0].demands,
-          "demandsMet": !data[0].demandMet,
+          "demandsMet": !(data[0].demandsMet),
           "id": data[0].id,
           "url": data[0].url,
           "randomCode": data[0].randomCode
