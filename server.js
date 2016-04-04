@@ -1,8 +1,15 @@
 var express = require("express"),
   http = require("http"),
   multer = require("multer"),
+  request = require("request"),
+  path = require("path"),
   app = express();
-var upload = multer({ dest: './upload' });
+var options = multer.diskStorage({ destination : './upload' ,
+  filename: function (req, file, cb) {
+    cb(null, (Math.random().toString(36)+'00000000000000000').slice(2, 10) + Date.now() + path.extname(file.originalname));
+  }
+});
+var upload = multer({ storage: options });
 // set up a static file directory to use for default routing
 // also see the note below about Windows
 app.use(express.static(__dirname));
@@ -10,11 +17,22 @@ app.use(express.static(__dirname));
 app.listen(8000, function () {
   console.log('Blackmail app listening on port 8000!');
 });
-// set up our routes
+
 app.post('/upload', upload.single('image'), function(req,res){
+  var fileData = path.parse(req.file.path);
   console.log(req.file);
   console.log(req.body); // form fields
-  console.log(req.files); // form files
-  res.send(req.file.filename);
+  request.post("http://localhost:3000/blackmails").form({
+    "creator": req.body.creator,
+    "title": req.body.title,
+    "recName": req.body.recName,
+    "recEmail": req.body.recEmail,
+    "date": req.body.date,
+    "time": req.body.time,
+    "demands": req.body.demands,
+    "demandsMet": false,
+    "url": fileData.name,
+    "randomCode": req.body.randomCode
+  });
   res.status(200).end()
 });

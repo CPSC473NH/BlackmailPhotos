@@ -172,7 +172,7 @@
 				</div>
 				<div class="modal-body">
 					<p class="bg-danger" id="createBlackmail-errorMsg"></p>
-					<form role="form" id="create-form">
+					<form role="form" method="POST" action="upload/" id="create-form" enctype="multipart/form-data" onsubmit="return false">
 						<div class="form-group">
 							<label for="title">Title of blackmail</label>
 							<input type="text" class="form-control"
@@ -196,7 +196,7 @@
 						<div class="form-group">
 							<label for="time">Set release time</label>
 							<input type="text" class="form-control time"
-										 id="time" placeholder="12:00 AM" name="time"/>
+										 id="time" placeholder="12:00 am" name="time"/>
 						</div>
 						<div class="form-group">
 							<label for="demands">Enter your demands</label>
@@ -204,16 +204,18 @@
 										 id="demands" placeholder="Demands" name="demands"/>
 						</div>
 						<div class="form-group">
-						<form id="imageForm" enctype="multipart/form-data">
-							<label for="image">Upload Blackmail Photo</label>
-      						<input id="image" type="file" class="file"><br/>
-							<button type="button" class="btn btn-primary" id="upload">Upload</button>
+							<!--<form id="imageForm" enctype="multipart/form-data">-->
+							<label for="imageUpload">Upload Blackmail Photo</label>
+							<input id="imageUpload" type="file" name="image" class="file"><br/>
+							<input type="hidden" name="creator" id="creator">
+							<input type="hidden" name="randomCode" id="randomCode">
+								<!--<button type="button" class="btn btn-primary" id="upload">Upload</button>-->
 						</div>
 					</form>
 				</div>
 				<div class="modal-footer" id="createBlackmail-footer">
 					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-					<button type="button" class="btn btn-primary" id="create">Create</button>
+					<input type="submit" class="btn btn-primary" id="create" form="create-form" value="Create">
 				</div>
 			</div><!-- /.modal-content -->
 		</div><!-- /.modal-dialog -->

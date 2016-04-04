@@ -73,45 +73,63 @@ $(document).ready(function() {
   });
 
   $("#createBlackmail").click(function() {
+    $("#randomCode").val(randomString(32, '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'));
+    $("#creator").val($currentUser);
     $("#createModal").modal();
   });
     
 
-  $("#create").click(function() {
-      var createData = _.object($("#create-form").serializeArray().map(function(v) {return [v.name, v.value];} ));
-      
-      var $temp = randomString(32, '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ');
-
-    //Not working yet: code to check if random string already tied to another blackmail
-    //var $looper = true;
-    //while($looper){
-    //$.get("http://localhost:3000/blackmails", {"randomCode": $temp}, function(data) {
-    //  console.log("data.length: "+data.length);
-    //  if(data.length > 0){
-    //    $temp = randomString(32, '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ');
-    //    console.log($temp);
-    //  }
-    //  else{
-    //    $looper = false;
-    //  }
-    //});
-    //}
-
-    $.post("http://localhost:3000/blackmails", {
-          "creator": $currentUser,
-          "title": createData.title,
-          "recName": createData.recName,
-          "recEmail": createData.recEmail,
-          "date": createData.date,
-          "time": createData.time,
-          "demands": createData.demands,
-          "demandsMet": false,
-          "url": createData.url,
-          "randomCode": $temp,
-        }, function() {
-          $("#createModal").modal("hide");
-          makeMyBlackmails();
+  $("#create-form").submit(function() {
+    //   var createData = _.object($("#create-form").serializeArray().map(function(v) {return [v.name, v.value];} ));
+    //
+    //   var $temp = randomString(32, '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ');
+    //
+    // //Not working yet: code to check if random string already tied to another blackmail
+    // //var $looper = true;
+    // //while($looper){
+    // //$.get("http://localhost:3000/blackmails", {"randomCode": $temp}, function(data) {
+    // //  console.log("data.length: "+data.length);
+    // //  if(data.length > 0){
+    // //    $temp = randomString(32, '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ');
+    // //    console.log($temp);
+    // //  }
+    // //  else{
+    // //    $looper = false;
+    // //  }
+    // //});
+    // //}
+    //
+    // $.post("http://localhost:3000/blackmails", {
+    //       "creator": $currentUser,
+    //       "title": createData.title,
+    //       "recName": createData.recName,
+    //       "recEmail": createData.recEmail,
+    //       "date": createData.date,
+    //       "time": createData.time,
+    //       "demands": createData.demands,
+    //       "demandsMet": false,
+    //       "url": createData.url,
+    //       "randomCode": $temp
+    //     }, function() {
+    //disable the default form submission
+    event.preventDefault();
+    var formData = new FormData(this);
+    $.ajax({
+      url: '/upload',
+      type: 'POST',
+      data: formData,
+      async: false,
+      cache: false,
+      contentType: false,
+      processData: false,
+      success: function (returndata) {
+        $("#createModal").modal("hide");
+        makeMyBlackmails();
+        return false;
+      }
     });
+
+    // });
   });
 
   $("#viewBlackmail").click(function() {
