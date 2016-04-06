@@ -3,6 +3,7 @@ var express = require("express"),
   multer = require("multer"),
   request = require("request"),
   path = require("path"),
+  emailer = require("nodemailer"),
   app = express();
 var options = multer.diskStorage({ destination : './upload' ,
   filename: function (req, file, cb) {
@@ -34,9 +35,9 @@ app.post('/upload', upload.single('image'), function(req,res){
     "url": fileData.name,
     "randomCode": req.body.randomCode
   });
-  res.status(200).end()
+  res.status(200).end();
   
-    var creator = req.body.creator;
+  var creator = req.body.creator;
   var date = req.body.date;
   var demands = req.body.demands;
   var demandMet = req.body.demandsMet;
