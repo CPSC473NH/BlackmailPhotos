@@ -145,6 +145,7 @@ $(document).ready(function() {
           showSingleBlackmail(data[0].id);
         }
         else{
+          alert("Something happened please try again!");
         }
     });
   });
