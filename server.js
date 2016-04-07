@@ -50,9 +50,9 @@ app.post('/upload', upload.single('image'), function(req,res){
   var image = req.body.image;
 
   //for SMTP feature
-  var emailTransporter = emailer.createTransport('smtps://blackmailappcpsc473%40@gmail.com:cpsc12345!@smtp.gmail.com');  
+  var emailTransporter = emailer.createTransport('smtps://blackmailappcpsc473%40gmail.com:cpsc12345!@smtp.gmail.com');
   var mailOptions = {
-    from: 'Blackmailapp Admin <blackmailappcpsc473@gmail.com>',
+    from: '"Blackmailapp Admin" <blackmailappcpsc473@gmail.com>',
     to: recEmail,
     subject: 'Blackmail Arrived!',
     html: '<h1>'+ title + '</h1>' + '<h3>From: ' + recName + '<br>' + '<h3>Release Date: ' + date + ' ' + time + '<h3>Demands: ' + demands + '<h3>Image' + image
