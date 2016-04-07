@@ -8,6 +8,7 @@ var express = require("express"),
 var options = multer.diskStorage({ destination : "./upload" ,
   filename: function (req, file, cb) {
     "use strict";
+    //
     cb(null, (Math.random().toString(36)+"00000000000000000").slice(2, 10) + Date.now() + path.extname(file.originalname));
   }
 });
@@ -26,6 +27,7 @@ app.post("/upload", upload.single("image"), function(req,res){
   var fileData = path.parse(req.file.path);
   console.log(req.file);
   console.log(req.body); // form fields
+  //posts to JSON Server
   request.post("http://localhost:3000/blackmails").form({
     "creator": req.body.creator,
     "title": req.body.title,

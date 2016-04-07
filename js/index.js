@@ -206,7 +206,7 @@ $(document).ready(function() {
     $("#blackmailDisp").empty();
     var $contactInfo ="<div>Please address all complaints and legal threats to:<br><br>";
     $contactInfo += "Former Vice President Dick Cheney<br>";
-    $contactInfo += "The American Interprise Institute<br>";
+    $contactInfo += "The American Enterprise Institute<br>";
     $contactInfo += "1150 Seventeenth Street, N.W.<br>";
     $contactInfo += "Washington, DC 20036</div>";
 
@@ -308,7 +308,7 @@ function showGalleryBlackmail($id) {
     $("#blackmailDisp").empty();
     var $singleBlackmailPage = '';
     $singleBlackmailPage += '<h1 class="col-md-12" style="color:red;font-size: 75px;">Photo Released</h1>';
-    $singleBlackmailPage +='<div class="col-md-12"><img class="thumbnail img-responsive" src="/upload/'+data[0].url+'.jpg" alt=""></img></div>';
+    $singleBlackmailPage +='<div class="col-md-12"><img class="thumbnail img-responsive" src="/upload/'+data[0].url+'.jpg" alt=""></div>';
     $singleBlackmailPage += '<div class="col-md-6">';
     $singleBlackmailPage += '<ul class="list-group">';
     $singleBlackmailPage += '<li class="list-group-item"><b>Recipient Name</b>:<br>'+data[0].recName;
@@ -372,7 +372,7 @@ function showSingleBlackmail($id) {
       $singleBlackmailPage += '</div></div>';
     }
 
-    $singleBlackmailPage +='<div class="col-md-12"><img class="thumbnail img-responsive" src="/upload/'+data[0].url+'.jpg" alt=""></img></div>';
+    $singleBlackmailPage +='<div class="col-md-12"><img class="thumbnail img-responsive" src="/upload/'+data[0].url+'.jpg" alt=""></div>';
 
     $singleBlackmailPage += '<div class="col-md-6">';
     $singleBlackmailPage += '<ul class="list-group">';
