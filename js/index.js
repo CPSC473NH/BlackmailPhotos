@@ -247,7 +247,7 @@ $(document).ready(function() {
 
           }
 
-          if (getTimeRemaining($deadline).total <= 0){
+          if (getTimeRemaining($deadline).total <= 0 && data[i].demandsMet === false){
             var $singleMail = '<div class="col-lg-3 col-md-4 col-xs-6 thumb">';
             $singleMail += '<a class="thumbnail" onclick="showGalleryBlackmail('+data[i].id+')" href="javascript:void(0)">';
             $singleMail += '<img class="img-responsive" style="max-width:50%;max-height:50%;" src="/upload/'+data[i].url+'.jpg" alt="'+data[i].title+'"></a>';
