@@ -105,8 +105,6 @@ $(document).ready(function() {
         return false;
       }
     });
-
-    // });
   });
 
   $("#viewBlackmail").click(function() {
@@ -115,7 +113,6 @@ $(document).ready(function() {
 
   $("#signinButton").click(function() {
     var signinData = _.object($("#registerSignIn-form").serializeArray().map(function(v) {return [v.name, v.value];} ));//converts form data to associative array
-      //TODO: post for signing in
       $.get("http://localhost:3000/accounts", {"username": signinData.email,"password": signinData.password}, function(data) {
 
         if (data.length <= 0) { // if account doesn't exist
