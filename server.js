@@ -35,7 +35,7 @@ app.post('/upload', upload.single('image'), function(req,res){
     "url": fileData.name,
     "randomCode": req.body.randomCode
   });
-  res.status(200).end();
+
   
   var creator = req.body.creator;
   var date = req.body.date;
@@ -64,4 +64,5 @@ app.post('/upload', upload.single('image'), function(req,res){
      } 
      console.log('Message Sent!');
   });
+  res.status(200).end();
 });
